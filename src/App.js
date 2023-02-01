@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, { Component } from "react";
+import FunctionalButton from './FunctionalButton';
+import ClassButton from "./ClassButton";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+        times: 0 
+    }
+
+    handleClick = (buttonName) => () => {
+        console.log('Clicked inside <App />, button was', buttonName)
+
+        this.setState({ times: this.state.times + 1})
+    }
+
+    render () {
+        return(
+            <div className="App">
+                <FunctionalButton 
+                    times={this.state.times}
+                    onButtonClick={this.handleClick}
+                />
+                <ClassButton 
+                    times={this.state.times}
+                    onButtonClick={this.handleClick}
+                />
+            </div>
+        )
+    }
 }
 
 export default App;
